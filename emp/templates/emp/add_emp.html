@@ -16,24 +16,32 @@
             <a class="btn btn-primary" href="/add_emp" role="button">Add An Employee</a>
             <a class="btn btn-primary" href="/remove_emp" role="button">Remove An Employee</a>
             <a class="btn btn-primary" href="/filter_emp" role="button">Filter Employee Details</a> {% endcomment %}
-            <form action="/add_emp" method="post">
+            <form action="/Add_Emp" method="post">
                 {% csrf_token %}
                   <label for="first_name">First_Name</label><br>
-                  <input type="text" id="first_name" value={{first_name}}><br>
+                  <input type="text" id="first_name" name="first_name" value={{ first_name }}><br>
+
                   <label for="last_name">Last_Name</label><br>
-                  <input type="text" id="last_name" value={{last_name}}><br>
+                  <input type="text" id="last_name" name="last_name" value={{ last_name }}><br>
+
                   <label for="dept">Department</label><br>
-                  <input type="text" id="dept" value={{dept}}><br>
+                  <input type="number" id="dept" name="dept" value={{ dept }}><br>
+
                   <label for="salary">Salary</label><br>
-                  <input type="number" id="salary" value={{salary}}><br>
+                  <input type="number" id="salary" name="salary" value={{ salary }}><br>
+
                   <label for="bonus">Bonus</label><br>
-                  <input type="number" id="bonus" value={{bonus}}><br>
+                  <input type="number" id="bonus" name="bonus" value={{ bonus }}><br>
+
                   <label for="role">Role</label><br>
-                  <input type="text" id="role" value={{role}}><br>
+                  <input type="number" id="role" name="role" value={{ role }}><br>
+
                   <label for="phone">Phone No</label><br>
-                  <input type="number" id="phone" value={{phone}}><br>
+                  <input type="number" id="phone" name="phone" value={{ phone }}><br>
+
                   <label for="hire_date">Hire Date</label><br>
-                  <input type="Date" id="hire_date" value={{hire_date}}><br>
+                  <input type="Date" id="hire_date" name="hire_date" value={{ hire_date }}><br>
+
                   <hr>
                   <button type="submit" class="btn btn-primary">Submit</button>
             </form>
