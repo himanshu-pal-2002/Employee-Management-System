@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Employee,Role,Department
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
@@ -34,7 +35,7 @@ def Add_Emp(request):
     else:
         return HttpResponse('An exception occured Employee Has not added')
 
-def Remove_Emp(request,emp_id=0):
+def Remove_Emp(request, emp_id = 0):
     if emp_id:
         try:
             emp_to_be_removed=Employee.objects.get(id=emp_id)
@@ -42,11 +43,34 @@ def Remove_Emp(request,emp_id=0):
             return HttpResponse('Employee Removed Successfully')
         except:
             return HttpResponse('Please Enter a Valid Emp Id')
-    emps=Employee.objects.all()
+        
+    emps = Employee.objects.all()
     context={
         'emps':emps
     }
     return render(request,'emp/remove_emp.html',context)
 
 def Filter_Emp(request):
-    return render(request,'emp/filter_emp.html')
+    if request.method=='POST':
+        name=request.POST['name']
+        dept=request.POST['dept']
+        role=request.POST['role']
+        
+        emps=Employee.objects.all()
+        
+        if name:
+            emps = emps.filter(Q(first_name__icontains = name) | Q(last_name__icontains = name))
+        if dept:
+            emps = emps.filter(dept__name__icontains = dept)
+        if role:
+            emps = emps.filter(role__name__icontains = role)
+            
+        context={
+            'emps':emps
+        }
+        return render(request,'emp/view_all_emp.html',context)
+    
+    elif request.method =='GET':
+        return render(request,'emp/filter_emp.html')
+    else:
+        return HttpResponse('An Exception Occured')

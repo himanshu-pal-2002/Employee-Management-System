@@ -22,7 +22,7 @@
                 </button>
                 <ul class="dropdown-menu">
                     {% for emp in emps %}
-                  <li><a class="dropdown-item" href="/Remove_Emp/">{{ emp.first_name }} {{ emp.last_name }}</a></li>
+                  <li><a class="dropdown-item" href="/Remove_Emp/{{emp.id}}">{{ emp.first_name }} {{ emp.last_name }}</a></li>
                   {% endfor %}
                 </ul>
               </div>
